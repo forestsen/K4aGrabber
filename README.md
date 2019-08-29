@@ -33,7 +33,8 @@ Contact
 References
 ----------
 * Kinect2Grabber
-  https://github.com/UnaNancyOwen/KinectGrabber
+
+  <https://github.com/UnaNancyOwen/KinectGrabber>
 
 * openni_grabber | Point Cloud Library  
   <https://github.com/PointCloudLibrary>
