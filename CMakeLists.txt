@@ -163,15 +163,15 @@ if(MSVC)
 endif()
 
 find_package(PCL 1.9.1 REQUIRED COMPONENTS io visualization)
-include_directories(${PCL_INCLUDE_DIRS})
-link_directories(${PCL_LIBRARY_DIRS})
-add_definitions(${PCL_DEFINITIONS})
 
-IF(PCL_FOUND)
-    INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/include)
-    INCLUDE_DIRECTORIES(${K4A_INCLUDE_DIRS})
-    ADD_EXECUTABLE(k4a_grabber ${PROJECT_SOURCE_DIR}/src/k4a_grabber.cpp ${PROJECT_SOURCE_DIR}/Source_pcl.cpp)
-    TARGET_LINK_LIBRARIES(k4a_grabber ${PCL_LIBRARIES} ${K4A_LIBS})
-ENDIF(PCL_FOUND)
+# Find GLM. You have to set the glm_room path with your environment
+set(GLM_DIR "D:/glm-0.9.7.1/my/install")
+set(GLM_ROOT "D:/glm-0.9.7.1/my/install")
+IF(NOT GLM_ROOT)
+    MESSAGE("ERROR: GLM_ROOT must be set!")
+ENDIF(NOT GLM_ROOT)
 
+FIND_PATH(GLM_INCLUDE_DIRS DOC "Path to GLM include directory." NAMES glm/glm.hpp PATHS ${GLM_ROOT}/include)
 
+add_subdirectory(PCL_Grabber_OneKinect)
+add_subdirectory(PCL_Grabber_TwoKinects)

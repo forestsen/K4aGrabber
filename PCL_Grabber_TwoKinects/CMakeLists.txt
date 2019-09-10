@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 2.8.3)
+
+if(MSVC)
+    add_definitions(-DNDEBUG)
+	add_definitions(-D_USE_MATH_DEFINES)
+    add_definitions(-DNOMINMAX)
+    add_definitions(-DPCL_NO_PRECOMPILE)
+    add_definitions(-DEIGEN_MAKE_ALIGNED_OPERATION_NEW)
+    add_definitions(${PCL_DEFINITIONS})
+endif()
+
+INCLUDE_DIRECTORIES(${K4A_INCLUDE_DIRS})
+include_directories(${PCL_INCLUDE_DIRS})
+include_directories(${GLM_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/include)
+add_executable(PCL_Grabber_TwoKinects "Source_pcl.cpp" "../src/k4a_grabber.cpp")
+target_link_libraries(PCL_Grabber_TwoKinects ${PCL_LIBRARIES} ${K4A_LIBS})

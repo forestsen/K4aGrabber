@@ -12,6 +12,22 @@ K4aGrabber supports the following pcl::PointType.
 
 Inspired By *[Kinect2Grabber](https://github.com/UnaNancyOwen/KinectGrabber)* .
 
+## Projects
+
+### OneKinect
+
+PCL Azure Kinect Grabber for one Kinect.
+
+### TwoKinects
+
+PCL Azure Kinect Grabber for 2 Kinects. 
+
+Using ArUco Library to calibrate the relative pose between master Kinect and sub Kinect.
+
+We just add two point cloud generated from two Kinects into one point cloud, and then we get a real-time point cloud of the scene.
+
+
+
 Environment
 -----------
 * Point Cloud Library v1.9.1

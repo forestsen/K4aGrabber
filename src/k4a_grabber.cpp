@@ -77,7 +77,7 @@ bool pcl::KinectAzureDKGrabber::isRunning() const
 
 std::string pcl::KinectAzureDKGrabber::getName() const
 {
-	return std::string("KinectAzureDKGrabber");
+	return std::string("KinectAzureDKGrabber: " + std::to_string(device_id));
 }
 
 float pcl::KinectAzureDKGrabber::getFramesPerSecond() const
@@ -179,23 +179,27 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr pcl::KinectAzureDKGrabber::convertDepthToPoi
 
 	int16_t *point_cloud_image_data = (int16_t *)(void *)point_cloud_image.get_buffer();
 
+#ifdef VTK_VISUALIZATION
 	Eigen::Matrix3f m;
 	m = Eigen::AngleAxisf(-M_PI, Eigen::Vector3f::UnitZ());
+#endif
 
 	for (int i = 0; i < width * height; ++i)
 	{
 		PointXYZ point;
 
-		point.x = point_cloud_image_data[3 * i + 0]/ 1000.0f;
-		point.y = point_cloud_image_data[3 * i + 1]/ 1000.0f;
-		point.z = point_cloud_image_data[3 * i + 2]/ 1000.0f;
+		point.x = point_cloud_image_data[3 * i + 0] / 1000.0f;
+		point.y = point_cloud_image_data[3 * i + 1] / 1000.0f;
+		point.z = point_cloud_image_data[3 * i + 2] / 1000.0f;
 
 		if (point.z == 0)
 		{
 			continue;
 		}
 
+#ifdef VTK_VISUALIZATION
 		point.getVector3fMap() = m * point.getVector3fMap();
+#endif
 
 		cloud->points[i] = point;
 	}
@@ -240,8 +244,10 @@ pcl::PointCloud<pcl::PointXYZI>::Ptr pcl::KinectAzureDKGrabber::convertInfraredD
 	int16_t *point_cloud_image_data = (int16_t *)(void *)point_cloud_image.get_buffer();
 	int16_t *transformed_infrared_image_data = (int16_t *)(void *)transformed_infrared_image.get_buffer();
 
+#ifdef VTK_VISUALIZATION
 	Eigen::Matrix3f m;
 	m = Eigen::AngleAxisf(-M_PI, Eigen::Vector3f::UnitZ());
+#endif
 
 	for (int i = 0; i < width * height; ++i)
 	{
@@ -258,7 +264,9 @@ pcl::PointCloud<pcl::PointXYZI>::Ptr pcl::KinectAzureDKGrabber::convertInfraredD
 
 		point.intensity = transformed_infrared_image_data[i];
 
+#ifdef VTK_VISUALIZATION
 		point.getVector3fMap() = m * point.getVector3fMap();
+#endif
 
 		cloud->points[i] = point;
 	}
@@ -296,8 +304,10 @@ pcl::PointCloud<pcl::PointXYZRGB>::Ptr pcl::KinectAzureDKGrabber::convertRGBDept
 	int16_t *point_cloud_image_data = (int16_t *)(void *)point_cloud_image.get_buffer();
 	uint8_t *color_image_data = colorImage.get_buffer();
 
+#ifdef VTK_VISUALIZATION
 	Eigen::Matrix3f m;
 	m = Eigen::AngleAxisf(-M_PI, Eigen::Vector3f::UnitZ());
+#endif
 
 	for (int i = 0; i < width * height; ++i)
 	{
@@ -310,7 +320,10 @@ pcl::PointCloud<pcl::PointXYZRGB>::Ptr pcl::KinectAzureDKGrabber::convertRGBDept
 		{
 			continue;
 		}
+
+#ifdef VTK_VISUALIZATION
 		point.getVector3fMap() = m * point.getVector3fMap();
+#endif
 
 		point.b = color_image_data[4 * i + 0];
 		point.g = color_image_data[4 * i + 1];
@@ -357,23 +370,28 @@ pcl::PointCloud<pcl::PointXYZRGBA>::Ptr pcl::KinectAzureDKGrabber::convertRGBADe
 	int16_t *point_cloud_image_data = (int16_t *)(void *)point_cloud_image.get_buffer();
 	uint8_t *color_image_data = colorImage.get_buffer();
 
+#ifdef VTK_VISUALIZATION
 	Eigen::Matrix3f m;
 	m = Eigen::AngleAxisf(-M_PI, Eigen::Vector3f::UnitZ());
+#endif
 
 	for (int i = 0; i < width * height; ++i)
 	{
 		PointXYZRGBA point;
 
-		point.x = point_cloud_image_data[3 * i + 0]/ 1000.0f;
-		point.y = point_cloud_image_data[3 * i + 1]/ 1000.0f;
-		point.z = point_cloud_image_data[3 * i + 2]/ 1000.0f;
+		point.x = point_cloud_image_data[3 * i + 0] / 1000.0f;
+		point.y = point_cloud_image_data[3 * i + 1] / 1000.0f;
+		point.z = point_cloud_image_data[3 * i + 2] / 1000.0f;
 
 		if (point.z == 0)
 		{
 			continue;
 		}
 
+
+#ifdef VTK_VISUALIZATION
 		point.getVector3fMap() = m * point.getVector3fMap();
+#endif
 
 		point.b = color_image_data[4 * i + 0];
 		point.g = color_image_data[4 * i + 1];
