@@ -46,7 +46,7 @@ endmacro()
 
 # Define the names of some files that we are going to try and find
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-  set(DEPTHENGINE_DLL "depthengine_1_0.dll")
+  set(DEPTHENGINE_DLL "depthengine_2_0.dll")
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
   set(DEPTHENGINE_DLL "libdepthengine.so.1.0")
 else()
@@ -62,7 +62,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
   message("Linux mode: Searching for K4A in system path and ./ext/sdk")
 
   # Test if we can find the k4a library in the system path
-  find_package(k4a 1.1.1 QUIET)
+  find_package(k4a 1.2.0 QUIET)
 
   if (${k4a_FOUND})
     message("K4A SDK found in system libraries!")
@@ -71,7 +71,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     list(APPEND K4A_LIBS k4a::k4a)
   else()
     message("K4A SDK not found in system libraries. Searching ./ext/sdk...")
-    find_package(k4a 1.1.1 PATHS "${CMAKE_CURRENT_SOURCE_DIR}/ext/sdk")
+    find_package(k4a 1.2.0 PATHS "${CMAKE_CURRENT_SOURCE_DIR}/ext/sdk")
 
     if(${k4a_FOUND})
       set(K4A_INSTALL_NEEDED true)
@@ -88,7 +88,7 @@ elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
   set(K4A_INSTALL_NEEDED true)
 
   # Try to find K4A installed to Program Files
-  find_package(azure-kinect-sensor-sdk 1.1.1 EXACT QUIET PATHS "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+  find_package(azure-kinect-sensor-sdk 1.2.0 EXACT QUIET PATHS "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
   if (${azure-kinect-sensor-sdk_FOUND})
     message("K4A SDK found in Program Files!")
@@ -114,7 +114,7 @@ elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
     endforeach(DLL)
   else()
     # Try to find K4A installed to ./ext/sdk
-    find_package(k4a 1.1.1 QUIET PATHS "${CMAKE_CURRENT_SOURCE_DIR}/ext/sdk")
+    find_package(k4a 1.2.0 QUIET PATHS "${CMAKE_CURRENT_SOURCE_DIR}/ext/sdk")
 
     if (${k4a_FOUND})
       message("K4A SDK found in ./ext/sdk!")
