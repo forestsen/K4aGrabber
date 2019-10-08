@@ -2,12 +2,6 @@ cmake_minimum_required(VERSION 2.8.3)
 PROJECT(K4a_grabber)
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-  add_compile_options(/std:c++latest)
-else()
-  add_compile_options(-std=c++11)
-endif()
-
 macro(process_ext_sdk)
   message(STATUS "K4A SDK found in ext/sdk!")
   message(STATUS "!! Not searching for SDK in system path !!")
