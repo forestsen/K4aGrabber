@@ -1,8 +1,8 @@
 ﻿K4aGrabber
 ==============
 
-K4aGrabber is a Grabber of PCL (Point Cloud Library) to retrieve the point cloud data from Kinect Azure DK using Kinect Azure DK v1.1.1.  
-This Grabber only depends on Kinect Azure DK v 1.1.1.  
+K4aGrabber is a Grabber of PCL (Point Cloud Library) to retrieve the point cloud data from Kinect Azure DK using Kinect Azure DK v1.2.0.  
+This Grabber only depends on Kinect Azure DK v 1.2.0.  
 
 K4aGrabber supports the following pcl::PointType.  
 * pcl::PointXYZ
@@ -31,7 +31,7 @@ We just add two point cloud generated from two Kinects into one point cloud, and
 Environment
 -----------
 * Point Cloud Library v1.9.1
-* Kinect v1.1.1
+* Kinect v1.2.0
 * Visual Studio Community 2017 
 
 License
