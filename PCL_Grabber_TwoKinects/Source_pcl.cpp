@@ -54,17 +54,17 @@ int main(int argc, char **argv)
 {
 	if (argc < 7)
 	{
-		throw std::runtime_error("Required arguments: \nframe_sub_master.csv frame_marker_sub.csv master_znear master_zfar sub_znear sub_zfar");
+		throw std::runtime_error("Required arguments: \nframe_sub_master.csv frame_sub_marker.csv master_znear master_zfar sub_znear sub_zfar");
 	}
 	string frame_sub_master_file = argv[1];
 	cout << "Reading frame_sub_master.csv" << endl;
 	Transform<float, 3, Affine> transformation_sub_master;
 	transformation_sub_master.matrix() = load_csv<float>(frame_sub_master_file);
 
-	string frame_marker_sub_file = argv[2];
-	cout << "Reading frame_marker_sub.csv" << endl;
-	Transform<float, 3, Affine> transformation_marker_sub;
-	transformation_marker_sub.matrix() = load_csv<float>(frame_marker_sub_file);
+	string frame_sub_marker_file = argv[2];
+	cout << "Reading frame_sub_marker.csv" << endl;
+	Transform<float, 3, Affine> transformation_sub_marker;
+	transformation_sub_marker.matrix() = load_csv<float>(frame_sub_marker_file);
 
 	float master_znear = std::stof(argv[3]);
 	float master_zfar = std::stof(argv[4]);
@@ -156,9 +156,9 @@ int main(int argc, char **argv)
 	transformation_sub_master.matrix()(2, 3) *= aspect;
 
 	
-	transformation_marker_sub.matrix()(0, 3) *= aspect;
-	transformation_marker_sub.matrix()(1, 3) *= aspect;
-	transformation_marker_sub.matrix()(2, 3) *= aspect;
+	transformation_sub_marker.matrix()(0, 3) *= aspect;
+	transformation_sub_marker.matrix()(1, 3) *= aspect;
+	transformation_sub_marker.matrix()(2, 3) *= aspect;
 
 	while (!viewer->wasStopped())
 	{
