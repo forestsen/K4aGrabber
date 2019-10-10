@@ -83,8 +83,6 @@ Eigen::Matrix4d colorCloudRegistrationOptimization(pcl::PointCloud<PointType>::C
 	convertToOpenCDPointCloud(pcl_source, open3d_source_original);
 	convertToOpenCDPointCloud(pcl_target, open3d_target_original);
 
-	std::array<double, 3> voxel_radius = { 0.04, 0.02, 0.01};
-	std::array<int, 3> max_iter = { 50, 30, 14};
 	open3d::registration::RegistrationResult result;
 	Eigen::Matrix4d current_transformation = init_transformation;
 
@@ -111,11 +109,7 @@ Eigen::Matrix4d colorCloudRegistrationOptimization(pcl::PointCloud<PointType>::C
 
 int main(int argc, char **argv)
 {
-	if (argc < 7)
-	{
-		throw std::runtime_error("Required arguments: \nframe_sub_master.csv");
-	}
-	string frame_sub_master_file = argv[1];
+	string frame_sub_master_file = "frame_sub_master.csv";
 	cout << "Reading frame_sub_master.csv" << endl;
 	Transform<double, 3, Affine> transformation_sub_master;
 	transformation_sub_master.matrix() = load_csv<double>(frame_sub_master_file);
