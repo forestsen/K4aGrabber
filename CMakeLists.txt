@@ -42,7 +42,7 @@ endmacro()
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
   set(DEPTHENGINE_DLL "depthengine_2_0.dll")
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-  set(DEPTHENGINE_DLL "libdepthengine.so.1.0")
+  set(DEPTHENGINE_DLL "libdepthengine.so.2.0")
 else()
   message(FATAL_ERROR "Platform ${CMAKE_SYSTEM_NAME} is not supported")
 endif()
@@ -157,6 +157,7 @@ if(MSVC)
 endif()
 
 find_package(PCL 1.9.1 REQUIRED COMPONENTS io visualization)
+FIND_PACKAGE(Open3D REQUIRED)
 
 # Find GLM. You have to set the glm_room path with your environment
 set(GLM_DIR "D:/glm-0.9.7.1/my/install")
