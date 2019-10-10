@@ -26,6 +26,7 @@ Using ArUco Library to calibrate the relative pose between master Kinect and sub
 
 We just add two point cloud generated from two Kinects into one point cloud, and then we get a real-time point cloud of the scene.
 
+Using the Open3D 0.8.0 to refine the calibration result from my [another project](https://github.com/forestsen/KinectAzureDKProgramming/tree/master/Aruco_TwoKinects_Calibration_Extrinsics).
 
 
 Environment
@@ -33,6 +34,7 @@ Environment
 * Point Cloud Library v1.9.1
 * Kinect v1.2.0
 * Visual Studio Community 2017 
+* Open3D 0.8.0
 
 License
 -------
